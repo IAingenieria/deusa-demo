@@ -36,6 +36,10 @@ export const CATEGORIAS = [
   { id: 'otros', nombre: 'Otros' },
 ]
 
+// Tipo de cambio por defecto (MXN por 1 USD) para abonos en pesos.
+// Es editable en cada abono; aquí solo se sugiere.
+export const TIPO_CAMBIO_MXN = 18.5
+
 // Estados de un pedido completo
 export const ESTADOS_PEDIDO = ['solicitado', 'comprado', 'en_camino', 'entregado']
 
@@ -152,7 +156,8 @@ export const PEDIDOS = [
     comision: 10,
     precioCompraTotal: null,
     ticketFoto: null,
-    abonos: [{ id: 'ab-1', monto: 30, fecha: '2026-07-26' }],
+    // Ejemplo: cliente pagó en PESOS. 555 MXN / 18.5 = 30 USD aplicados al saldo.
+    abonos: [{ id: 'ab-1', monto: 555, moneda: 'MXN', tipoCambio: 18.5, montoUSD: 30, fecha: '2026-07-26' }],
   },
   {
     id: 'p-1002',
@@ -168,7 +173,7 @@ export const PEDIDOS = [
     comision: 8,
     precioCompraTotal: 50,
     ticketFoto: null,
-    abonos: [{ id: 'ab-2', monto: 40, fecha: '2026-07-25' }],
+    abonos: [{ id: 'ab-2', monto: 40, moneda: 'USD', tipoCambio: null, montoUSD: 40, fecha: '2026-07-25' }],
   },
   {
     id: 'p-1003',
@@ -186,8 +191,9 @@ export const PEDIDOS = [
     precioCompraTotal: 56,
     ticketFoto: null,
     abonos: [
-      { id: 'ab-3', monto: 40, fecha: '2026-07-23' },
-      { id: 'ab-4', monto: 20, fecha: '2026-07-24' },
+      { id: 'ab-3', monto: 40, moneda: 'USD', tipoCambio: null, montoUSD: 40, fecha: '2026-07-23' },
+      // Ejemplo: pago en PESOS. 370 MXN / 18.5 = 20 USD aplicados al saldo.
+      { id: 'ab-4', monto: 370, moneda: 'MXN', tipoCambio: 18.5, montoUSD: 20, fecha: '2026-07-24' },
     ],
   },
   {
@@ -204,7 +210,7 @@ export const PEDIDOS = [
     comision: 9,
     precioCompraTotal: 63,
     ticketFoto: null,
-    abonos: [{ id: 'ab-5', monto: 60, fecha: '2026-07-20' }],
+    abonos: [{ id: 'ab-5', monto: 60, moneda: 'USD', tipoCambio: null, montoUSD: 60, fecha: '2026-07-20' }],
   },
 ]
 

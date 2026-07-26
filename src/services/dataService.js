@@ -21,7 +21,7 @@ import { SEED } from '../data/mockData'
 
 // Nota: al cambiar el modelo de datos (precios USD, fotos, etc.) se sube la
 // versión de la clave para que el demo se resiembre con los datos nuevos.
-const KEY = 'deusa_demo_v4'
+const KEY = 'deusa_demo_v5'
 
 // ---------- Infraestructura de almacenamiento ----------
 
@@ -211,12 +211,28 @@ export function registrarTicket(pedidoId, { ticketFoto, precioCompraTotal }) {
 
 // ---------- Abonos / pagos ----------
 
-export function addAbono(pedidoId, { monto, fecha }) {
+// Registra un abono. El cliente puede pagar en USD o en PESOS (MXN).
+// - moneda: 'USD' | 'MXN'
+// - tipoCambio: MXN por 1 USD (solo aplica si moneda === 'MXN')
+// El saldo del pedido está en USD, así que siempre se guarda el equivalente
+// en dólares (montoUSD) para descontarlo correctamente.
+export function addAbono(pedidoId, { monto, moneda = 'USD', tipoCambio = null, fecha }) {
   const db = loadDB()
   const p = db.pedidos.find((x) => x.id === pedidoId)
   if (!p) return null
+  const montoNum = Number(monto)
+  const tc = Number(tipoCambio)
+  const montoUSD =
+    moneda === 'MXN' && tc > 0 ? Number((montoNum / tc).toFixed(2)) : montoNum
   p.abonos = p.abonos || []
-  p.abonos.push({ id: uid('ab'), monto: Number(monto), fecha })
+  p.abonos.push({
+    id: uid('ab'),
+    monto: montoNum,
+    moneda,
+    tipoCambio: moneda === 'MXN' ? tc : null,
+    montoUSD,
+    fecha,
+  })
   saveDB(db)
   return p
 }
@@ -234,9 +250,11 @@ export function totalVenta(pedido) {
   return items + (pedido.comision || 0)
 }
 
-// Total ya abonado por el cliente en ese pedido
+// Total ya abonado por el cliente en ese pedido, SIEMPRE en USD.
+// Usa montoUSD (equivalente convertido); si un abono viejo no lo tiene,
+// cae al monto original (compatibilidad).
 export function totalAbonado(pedido) {
-  return (pedido.abonos || []).reduce((s, a) => s + a.monto, 0)
+  return (pedido.abonos || []).reduce((s, a) => s + (a.montoUSD ?? a.monto), 0)
 }
 
 // Saldo pendiente del pedido

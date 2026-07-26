@@ -3,9 +3,10 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
-export default defineConfig({
-  // Ruta base para GitHub Pages (sitio de proyecto): https://USUARIO.github.io/deusa-demo/
-  base: '/deusa-demo/',
+export default defineConfig(({ command }) => ({
+  // En producción (build para GitHub Pages) la app vive en /deusa-demo/.
+  // En desarrollo local (npm run dev) se sirve en la raíz "/".
+  base: command === 'build' ? '/deusa-demo/' : '/',
   plugins: [
     react(),
     VitePWA({
@@ -46,4 +47,4 @@ export default defineConfig({
       },
     }),
   ],
-})
+}))

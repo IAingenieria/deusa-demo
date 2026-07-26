@@ -1,5 +1,6 @@
 // Utilidades de formato para el demo.
 
+// Moneda principal de la app: dólares (compras en USA).
 export const money = (n) =>
   new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -7,6 +8,20 @@ export const money = (n) =>
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(Number(n || 0))
+
+// Pesos mexicanos (para cuando el cliente paga en MN).
+// Se antepone "MX" para distinguir de dólares (ambos usan el símbolo $).
+export const mxn = (n) =>
+  'MX' +
+  new Intl.NumberFormat('es-MX', {
+    style: 'currency',
+    currency: 'MXN',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(Number(n || 0))
+
+// Formatea según moneda ('USD' | 'MXN').
+export const enMoneda = (n, moneda = 'USD') => (moneda === 'MXN' ? mxn(n) : money(n))
 
 export const fechaCorta = (iso) => {
   if (!iso) return '—'
