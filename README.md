@@ -8,6 +8,13 @@ PWA **DEMO** para gestionar compras por encargo de **México → tiendas de USA*
 > (`src/services/dataService.js`). Al recargar, si `localStorage` está vacío, se
 > re-siembra con `src/data/mockData.js`.
 
+## 🌐 Demo en vivo
+
+**https://iaingenieria.github.io/deusa-demo/**
+
+Desplegado automáticamente en GitHub Pages con GitHub Actions (`.github/workflows/deploy.yml`)
+en cada push a `main`. Guía de uso detallada: [`Guia_de_Uso_DeUSA.pdf`](Guia_de_Uso_DeUSA.pdf).
+
 ---
 
 ## 🚀 Cómo correr el demo
