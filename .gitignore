@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Documentos internos de operación (Goodman Tech) — NO publicar en el repo público
+Contexto.md
+Bitacora.md
+OBSERVACIONES_CLIENTE.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
