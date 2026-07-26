@@ -49,7 +49,7 @@ export const ESTADOS_ITEM = ['pendiente', 'comprado', 'agotado', 'sustituido']
 // ---- Personas ----
 export const COMPRADORES = [
   { id: 'c-olga', nombre: 'Olga', rol: 'comprador', zona: 'McAllen, TX' },
-  { id: 'c-luis', nombre: 'Luis', rol: 'comprador', zona: 'Laredo, TX' },
+  { id: 'c-luis', nombre: 'Javier', rol: 'comprador', zona: 'Laredo, TX' },
 ]
 
 export const CLIENTES = [

@@ -21,7 +21,7 @@ import { SEED } from '../data/mockData'
 
 // Nota: al cambiar el modelo de datos (precios USD, fotos, etc.) se sube la
 // versión de la clave para que el demo se resiembre con los datos nuevos.
-const KEY = 'deusa_demo_v5'
+const KEY = 'deusa_demo_v6'
 
 // ---------- Infraestructura de almacenamiento ----------
 
