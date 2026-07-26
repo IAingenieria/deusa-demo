@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #f4f6fb;
+  color: #1b2a5b;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Evita el zoom en iOS al enfocar inputs */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+@layer components {
+  /* ---- Botones 3D (borde inferior sólido + presión al hacer clic) ---- */
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition-all duration-100 disabled:opacity-50 disabled:pointer-events-none;
+    transform: translateY(0);
+  }
+  .btn:active {
+    transform: translateY(3px);
+  }
+
+  .btn-primary {
+    @apply btn text-white;
+    background-image: linear-gradient(180deg, #2c4079 0%, #1b2a5b 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      0 4px 0 #101a3c,
+      0 7px 14px rgba(16, 25, 58, 0.38);
+  }
+  .btn-primary:active {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 1px 0 #101a3c,
+      0 3px 7px rgba(16, 25, 58, 0.3);
+  }
+
+  .btn-accent {
+    @apply btn text-white;
+    background-image: linear-gradient(180deg, #ef4c4c 0%, #e03131 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.34),
+      0 4px 0 #9e1c1c,
+      0 7px 14px rgba(224, 49, 49, 0.32);
+  }
+  .btn-accent:active {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 1px 0 #9e1c1c,
+      0 3px 7px rgba(224, 49, 49, 0.28);
+  }
+
+  .btn-outline {
+    @apply btn text-marino;
+    background-image: linear-gradient(180deg, #ffffff 0%, #eef1f9 100%);
+    border: 1px solid rgba(27, 42, 91, 0.12);
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      0 3px 0 #ced6e8,
+      0 6px 12px rgba(27, 42, 91, 0.14);
+  }
+  .btn-outline:active {
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      0 1px 0 #ced6e8,
+      0 2px 6px rgba(27, 42, 91, 0.12);
+  }
+
+  .btn-ghost {
+    @apply btn text-marino;
+    box-shadow: none;
+  }
+  .btn-ghost:active {
+    transform: translateY(1px);
+  }
+
+  .card {
+    @apply rounded-2xl bg-white shadow-card;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium;
+  }
+  .input {
+    @apply w-full rounded-lg border border-marino/15 bg-white px-3 py-2 text-marino outline-none focus:border-marino focus:ring-2 focus:ring-marino/15;
+  }
+  .label {
+    @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-marino/60;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(27, 42, 91, 0.2);
+  border-radius: 8px;
+}
+
+/* Franja tipo bandera para acentos decorativos */
+.flag-stripe {
+  background: linear-gradient(
+    90deg,
+    #1b2a5b 0%,
+    #1b2a5b 33%,
+    #ffffff 33%,
+    #ffffff 66%,
+    #e03131 66%,
+    #e03131 100%
+  );
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
